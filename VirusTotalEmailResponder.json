@@ -1,0 +1,90 @@
+{
+  "name": "VirusTotalEmailResponder",
+  "version": "1.4",
+  "author": "Security Team",
+  "url": "https://github.com/your-org/cortex-responders",
+  "license": "AGPL-V3",
+  "description": "Send enhanced VirusTotal analysis results via email with full case details, severity classification, fallback to taxonomies, and configurable TLS",
+  "dataTypeList": ["thehive:case_artifact"],
+  "command": "VirusTotalEmailResponder/virustotal_email_responder.py",
+  "baseConfig": "VirusTotalEmailResponder",
+  "config": {
+    "service": "email",
+    "check_tlp": true,
+    "max_tlp": 2
+  },
+  "configurationItems": [
+    {
+      "name": "mailhog_host",
+      "description": "MailHog or SMTP server hostname or IP address",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "localhost"
+    },
+    {
+      "name": "mailhog_port",
+      "description": "MailHog or SMTP server port",
+      "type": "number",
+      "multi": false,
+      "required": false,
+      "defaultValue": 1025
+    },
+    {
+      "name": "smtp_username",
+      "description": "SMTP server username for authentication (optional)",
+      "type": "string",
+      "multi": false,
+      "required": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "smtp_password",
+      "description": "SMTP server password for authentication (optional)",
+      "type": "string",
+      "multi": false,
+      "required": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "use_tls",
+      "description": "Enable TLS for SMTP connection (disable for MailHog)",
+      "type": "boolean",
+      "multi": false,
+      "required": false,
+      "defaultValue": false
+    },
+    {
+      "name": "from_email",
+      "description": "Sender email address",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "security-alerts@yourdomain.com"
+    },
+    {
+      "name": "to_email",
+      "description": "Recipient email address (can be comma-separated for multiple recipients)",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "soc-team@yourdomain.com"
+    },
+    {
+      "name": "malware_threshold",
+      "description": "Malware detection threshold percentage (0-100) - used for severity classification",
+      "type": "number",
+      "multi": false,
+      "required": false,
+      "defaultValue": 50.0
+    },
+    {
+      "name": "only_send_above_threshold",
+      "description": "Only send emails for files with malware percentage above threshold",
+      "type": "boolean",
+      "multi": false,
+      "required": false,
+      "defaultValue": false
+    }
+  ]
+}
